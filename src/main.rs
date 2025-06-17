@@ -79,10 +79,17 @@ fn count_elements_multi(data: &[i32], num_threads: usize) -> (usize, usize, usiz
 }
 
 fn main() {
+
+    println!("Enter number of threads:");
+    let mut input = String::new();
+    std::io::stdin().read_line(&mut input).unwrap();
+    let thread_count: usize = input.trim().parse().unwrap_or(1);
+
+
     // Parameters
     let array_size = 100_000_000;
     let value_range = 1000;
-    let thread_count = 4;
+    // let thread_count = 4;
 
     println!("Generating array with {} elements in range [-{}, {}]...", array_size, value_range, value_range);
     let data = generate_data(array_size, value_range);
@@ -96,11 +103,11 @@ fn main() {
     println!("Multi-threaded:  {} zeros, {} positives, {} negatives in {} ms", zeros_multi, pos_multi, neg_multi, time_multi);
 
     assert_eq!((zeros_single, pos_single, neg_single), (zeros_multi, pos_multi, neg_multi));
-    println!("✅ Results match! 🎯");
+    // println!("Results match!");
 
     if time_multi < time_single {
-        println!("🎉 Multithreaded version was faster by {} ms!", time_single - time_multi);
+        println!("Multithreaded version was faster by {} ms.", time_single - time_multi);
     } else {
-        println!("😅 Multithreaded version was slower by {} ms... (try increasing array size or tuning thread count)", time_multi - time_single);
+        println!("Multithreaded version was slower by {} ms.", time_multi - time_single);
     }
 }
