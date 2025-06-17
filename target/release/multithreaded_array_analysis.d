@@ -1,0 +1,1 @@
+/Users/rivermoshkina/rust_practice/multithreaded_array_analysis/target/release/multithreaded_array_analysis: /Users/rivermoshkina/rust_practice/multithreaded_array_analysis/src/main.rs
