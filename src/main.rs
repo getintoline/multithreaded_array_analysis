@@ -6,7 +6,7 @@ use rand::Rng;
 use std::thread;
 use std::time::Instant;
 
-/// Generates a vector of random i32 values in the range [-range, +range]
+/// Генерирует вектор случайных значений i32 в диапазоне [-range, +range]
 fn generate_data(size: usize, range: i32) -> Vec<i32> {
     let mut rng = rand::thread_rng();
     (0..size).map(|_| rng.gen_range(-range..=range)).collect()
@@ -87,23 +87,23 @@ fn main() {
 
 
     // Parameters
-    let array_size = 100_000_000;
+    let array_size = 200_000_000;
     let value_range = 1000;
     // let thread_count = 4;
 
-    println!("Generating array with {} elements in range [-{}, {}]...", array_size, value_range, value_range);
+    // println!("Generating array with {} elements in range [-{}, {}]...", array_size, value_range, value_range);
     let data = generate_data(array_size, value_range);
 
-    println!("Starting single-threaded count...");
+    // println!("Starting single-threaded count...");
     let (zeros_single, pos_single, neg_single, time_single) = count_elements_single(&data);
     println!("Single-threaded: {} zeros, {} positives, {} negatives in {} ms", zeros_single, pos_single, neg_single, time_single);
 
-    println!("Starting multi-threaded count with {} threads...", thread_count);
+    // println!("Starting multi-threaded count with {} threads...", thread_count);
     let (zeros_multi, pos_multi, neg_multi, time_multi) = count_elements_multi(&data, thread_count);
     println!("Multi-threaded:  {} zeros, {} positives, {} negatives in {} ms", zeros_multi, pos_multi, neg_multi, time_multi);
 
     assert_eq!((zeros_single, pos_single, neg_single), (zeros_multi, pos_multi, neg_multi));
-    // println!("Results match!");
+    // println!("Матчинг!");
 
     if time_multi < time_single {
         println!("Multithreaded version was faster by {} ms.", time_single - time_multi);
